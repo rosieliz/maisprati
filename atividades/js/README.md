@@ -1,0 +1,1 @@
+Todos os arquivos .js foram testados com [Bun.js](https://bun.sh/). Funções como `prompt` podem não existir em outros runtimes, o que pode ser resolvido com a instalação de uma lib como "prompt-sync".
