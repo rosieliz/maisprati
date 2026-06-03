@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Formulário</title>
+</head>
+<body>
+    <form action="#">
+        <label>
+            Nome
+            <input
+                type="text"
+                name="nome"
+                placeholder="Digite seu nome completo"
+                required
+            >
+        </label>
+        <br><br>
+        <label>
+            Email
+            <input
+                type="email" 
+                name="email" 
+                placeholder="seuemail@gmail.com"
+                required
+            >
+        </label>
+        <br><br>
+        <label>
+            Senha
+            <input
+                type="password" 
+                name="senha" 
+                placeholder="Senha com 16 caracteres"
+                minlength="16"
+                required
+            >
+        </label>
+        <br><br>
+        <label>
+            Telefone
+            <input
+                type="tel" 
+                name="telefone" 
+                placeholder="+55 11 91234-5678"
+                required
+            >
+        </label>
+        <br><br>
+        <label>
+            Data de Nascimento
+            <input
+                type="date" 
+                name="data" 
+                required
+            >
+        </label>
+        <p>Escolha seu turno:</p>
+        <label>
+            <input id="manha" type="radio" name="turno">
+            Manhã
+        </label>
+        <br>
+        <label>
+            <input id="tarde" type="radio" name="turno">
+            Tarde
+        </label>
+        <br>
+        <label>
+            <input id="noite" type="radio" name="turno">
+            Noite
+        </label>
+        <br><br>
+        <p>Matérias:</p>
+        <label>
+            <input id="quimica" type="checkbox" name="materia" value="quimica">
+            Química
+        </label>
+        <label>
+            <input id="matematica" type="checkbox" name="materia" value="matematica">
+            Matemática
+        </label>
+        <label>
+            <input id="ingles" type="checkbox" name="materia" value="ingles">
+            Inglês
+        </label>
+    </form>
+</body>
+</html>
