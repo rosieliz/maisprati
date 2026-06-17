@@ -1,0 +1,112 @@
+:root {
+    --card-bg: #effff4;
+    --light: #f5f0ff;
+    --dark: #222222;
+    --accent: #ff0000;
+    --secondary: #cccccc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: fit-content;
+}
+
+html {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--light);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    & > * {
+        width: 100%;
+    }
+}
+
+.cabecalho,
+.rodape {
+    background-color: var(--dark);
+    color: var(--light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.cabecalho {
+    text-decoration: none;
+}
+
+.menu {
+    display: flex;
+    gap: 15px;
+
+    a {
+        color: var(--light);
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--accent);
+        }
+    }
+}
+
+.cards {
+    background-color: var(--light);
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.produto {
+    background-color: var(--card-bg);
+    width: 250px;
+    padding: 25px;
+    border: solid 2px var(--secondary);
+    border-radius: 5px;
+
+    h2, p {
+        margin-bottom: 15px;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    button {
+        padding: 8px;
+        background-color: var(--dark);
+        color: var(--light);
+        cursor: pointer;
+        border-radius: 4px;
+    }
+}
+
+.rodape {
+    margin: 0 auto;
+    gap: 10px;
+    position: absolute;
+    bottom: 0;
+}
+
+.redes-sociais {
+    display: flex;
+    gap: 15px;
+
+    a img {
+        width: 25px;
+    }
+}
