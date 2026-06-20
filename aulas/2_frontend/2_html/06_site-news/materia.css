@@ -289,3 +289,33 @@ body {
         cursor: pointer;
     }
 }
+
+
+/* Postagens relacionadas */
+
+.relacionados {
+    border-top: 3px solid var(--primary);
+    padding: 32px;
+
+    .grade {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+}
+
+.cartao {
+    background-color: var(--light);
+    padding: 18px;
+    border-radius: var(--radius);
+
+    h3 {
+        font-size: 17px;
+        margin-top: 10px;
+    }
+}
