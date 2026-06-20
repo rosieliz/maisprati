@@ -1,0 +1,36 @@
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 4px solid var(--primary);
+    background-color: var(--background);
+
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo,
+.logo a {
+    font-size: 26px;
+    font-weight: bold;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.navegacao {
+    display: flex;
+    gap: 20px;
+
+    a {
+        font-family: var(--font-ui);
+        font-size: 15px;
+        color: var(--primary);
+        text-decoration: none;
+
+        &:hover {
+            color: var(--accent);
+        }
+    }
+}

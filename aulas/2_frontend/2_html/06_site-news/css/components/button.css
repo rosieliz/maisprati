@@ -1,0 +1,15 @@
+.btn {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    padding: 8px 14px;
+    border: 1px solid var(--primary);
+    background-color: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn--primary {
+    background-color: var(--accent);
+    color: var(--light);
+    border: none;
+}

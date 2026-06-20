@@ -3,60 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notícias</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Clarim Diário</title>
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="js/components/site-header.js" defer></script>
+    <script src="js/components/news-card.js" defer></script>
+    <script src="js/components/site-footer.js" defer></script>
 </head>
 <body>
-    <header class="cabecalho">
-        <div class="logo">
-            Clarim Diário
-        </div>
-        <nav class="navegacao">
-            <a href="#">Política</a>
-            <a href="#">Economia</a>
-            <a href="#">Esportes</a>
-            <a href="#">Filmes</a>
-        </nav>
-    </header>
-    <main class="principal">
-        <article class="destaque">
-            <span class="categoria">Homem-Aranha</span>
-            <h1>Homem-Aranha é visto de máscara</h1>
-            <p class="resumo">Na ponde Manhattan, Homem-aranha é visto batendo em um senhor de 6 braços.</p>
-            <div class="meta">
-                <span>Por J. Jonah Jameson</span>
-                <span>17 de Junho de 2026</span>
+    <site-header></site-header>
+
+    <div class="conteudo">
+        <main class="principal">
+            <article class="card card--destaque">
+                <span class="categoria">Homem-Aranha</span>
+                <h1 class="card__titulo">Homem-Aranha é visto de máscara</h1>
+                <p class="card__resumo">Na ponde Manhattan, Homem-aranha é visto batendo em um senhor de 6 braços.</p>
+            </article>
+
+            <section class="grade-noticias">
+                <news-card
+                    categoria="Economia"
+                    titulo="Dólar despenca e volta a ser R$2"
+                    resumo="Mercado reage à eleição de Wilson Fisk como prefeito de Nova York, declarando apoio total ao Presidente Capitão Pátria."
+                ></news-card>
+                <news-card
+                    categoria="Política"
+                    titulo="Luz estrelistas  são vistos acenando para as estrelas."
+                    resumo="Em manifestação as declarações de Profundo, que disse que os peixes estão morrendo afogados."
+                ></news-card>
+                <news-card
+                    categoria="Esportes"
+                    titulo="Time do New York Cats vence estadual de Nova York"
+                    resumo="Flash Thompson levanta o proféu e beija sua amada Mary Jane. Fotógrafo Peter Parker trás todas as imagens e cobertura."
+                ></news-card>
+            </section>
+        </main>
+
+        <aside class="menu-lateral">
+            <div class="caixa">
+                <h3>Mais lidas</h3>
+                <ol>
+                    <li>O que muda agora que todos sabem que Billy Butcher morreu?</li>
+                    <li>Batman é visto com a Catwoman em telhado.</li>
+                    <li>Estreando no mundo da moda, Harley Queen destrói o palco.</li>
+                    <li>Goku revive pela 6ª vez.</li>
+                </ol>
             </div>
-        </article>
-        <section class="grade-noticias">
-            <article class="cartao">
-                <span class="categoria">Economia</span>
-                <h2>Dólar despenca e volta a ser R$2</h2>
-                <p>Mercado reage à eleição de Wilson Fisk como prefeito de Nova York, declarando apoio total ao Presidente Capitão Pátria.</p>
-            </article>
-            <article class="cartao">
-                <span class="categoria">Política</span>
-                <h2>Luz estrelistas  são vistos acenando para as estrelas.</h2>
-                <p>Em manifestação as declarações de Profundo, que disse que os peixes estão morrendo afogados.</p>
-            </article>
-            <article class="cartao">
-                <span class="categoria">Esportes</span>
-                <h2>Time do New York Cats vence estadual de Nova York</h2>
-                <p>Flash Thompson levanta o proféu e beija sua amada Mary Jane. Fotógrafo Peter Parker trás todas as imagens e cobertura.</p>
-            </article>
-        </section>
-    </main>
-    <aside class="menu-lateral">
-        <h3>Mais lidas</h3>
-        <ol>
-            <li>O que muda agora que todos sabem que Billy Butcher morreu?</li>
-            <li>Batman é visto com a Catwoman em telhado.</li>
-            <li>Estreando no mundo da moda, Harley Queen destrói o palco.</li>
-            <li>Goku revive pela 6ª vez.</li>
-        </ol>
-    </aside>
-    <footer class="rodape">
-        <p>&copy; 2026 Clarim Diário - Desenvolvido por Max Steel</p>
-    </footer>
+        </aside>
+    </div>
+
+    <site-footer></site-footer>
 </body>
 </html>
