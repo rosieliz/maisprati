@@ -3,26 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batman lançá o Batpapo</title>
+    <title>Batman lança o Batpapo</title>
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="materia.css">
+
+    <script src="../js/components/site-header.js" defer></script>
+    <script src="../js/components/news-card.js" defer></script>
+    <script src="../js/components/site-footer.js" defer></script>
 </head>
 <body>
-    <header class="cabecalho">
-        <a class="logo" href="index.html">Clarim Diário</a>
-        <nav class="navegacao">
-            <a href="#">Política</a>
-            <a href="#">Economia</a>
-            <a href="#">Esportes</a>
-            <a href="#">Homem-Aranha</a>
-        </nav>
-    </header>
+    <site-header></site-header>
+
     <nav class="trilha">
-        <a href="index.html">Início</a>
+        <a href="../index.html">Início</a>
         <span>/</span>
         <a href="#">Política</a>
         <span>/</span>
         <span class="atual">Batman lança o Batpapo</span>
     </nav>
+
     <div class="conteudo">
         <article class="materia">
             <span class="categoria">Política</span>
@@ -35,8 +34,8 @@
                     <span class="data">18 de junho de 2026 - 8 min de leitura</span>
                 </div>
                 <div class="compartilhar">
-                    <button>Compartilhar</button>
-                    <button>Salvar</button>
+                    <button class="btn btn--primary">Compartilhar</button>
+                    <button class="btn btn--primary">Salvar</button>
                 </div>
             </div>
             <div class="texto">
@@ -54,10 +53,10 @@
             </div>
 
             <div class="tags">
-                <a href="#">Heróis</a>
-                <a href="#">Justiça</a>
-                <a href="#">Vingança</a>
-                <a href="#">Cachaça</a>
+                <a href="#" class="tag">Heróis</a>
+                <a href="#" class="tag">Justiça</a>
+                <a href="#" class="tag">Vingança</a>
+                <a href="#" class="tag">Cachaça</a>
             </div>
 
             <figure class="imagem-destaque">
@@ -65,6 +64,7 @@
                 <figcaption>Batman e Robin Fogem da Polícia</figcaption>
             </figure>
         </article>
+
         <aside class="menu-lateral">
             <div class="caixa">
                 <h3>Mais lidas</h3>
@@ -75,52 +75,34 @@
                     <li>Chuva Cai Molhada Mais uma Vez em Não-me-toque</li>
                 </ol>
             </div>
+
             <div class="caixa-newsletter">
                 <h3>Receba as notícias</h3>
-                <p>
-                Assine nosso boletim diário.
+                <p>Assine nosso boletim diário.</p>
                 <input type="email" placeholder="seu@email.com">
-                <button>Assinar</button>
-                </p>
+                <button class="btn btn--primary">Assinar</button>
             </div>
         </aside>
     </div>
+
     <section class="relacionados">
         <h2>Leia também</h2>
         <div class="grade">
-            <article class="cartao">
-                <span class="categoria">Economia</span>
-                <h3>Dólar recua e a bolsa fecha em alta</h3>
-            </article>
-            <article class="cartao">
-                <span class="categoria">Cultura</span>
-                <h3>Churrasco de RS é eleito o melhor do país.</h3>
-            </article>
-            <article class="cartao">
-                <span class="categoria">Esportes</span>
-                <h3>Brasil é Hexacampeão</h3>
-            </article>
+            <news-card
+                categoria="Economia"
+                titulo="Dólar recua e a bolsa fecha em alta"
+            ></news-card>
+            <news-card
+                categoria="Cultura"
+                titulo="Churrasco de RS é eleito o melhor do país."
+            ></news-card>
+            <news-card
+                categoria="Esportes"
+                titulo="Brasil é Hexacampeão"
+            ></news-card>
         </div>
     </section>
-    <footer class="rodape">
-        <div class="coluna">
-            <h4><strong>Clarim Diário</strong></h4>
-            <p>Alta Credibilidade, Dirigido por J. Jonah Jameson</p>
-        </div>
-        <div class="coluna">
-            <h4>Editoriais</h4>
-            <a href="#">Política</a>
-            <a href="#">Cultura</a>
-            <a href="#">Esportes</a>
-            <a href="#">Homem-Aranha</a>
-        </div>
-        <div class="coluna">
-            <h4>Institucional</h4>
-            <a href="#">Termos de Uso</a>
-            <a href="#">Privacidade</a>
-            <a href="#">Quem Somos</a>
-            <a href="#">Contato</a>
-        </div>
-    </footer>
+
+    <site-footer></site-footer>
 </body>
 </html>

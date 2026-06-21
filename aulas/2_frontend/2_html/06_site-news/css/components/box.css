@@ -1,0 +1,40 @@
+.caixa {
+    background-color: var(--light);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 20px;
+
+    h3 {
+        font-size: 18px;
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 8px;
+        margin-bottom: 14px;
+    }
+
+    ol {
+        padding-left: 18px;
+    }
+
+    li {
+        margin-bottom: 12px;
+    }
+}
+
+.caixa-newsletter {
+    input,
+    .btn {
+        width: 100%;
+        font-family: var(--font-ui);
+        padding: 10px;
+        margin-top: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+
+    .btn {
+        background-color: var(--accent);
+        color: var(--light);
+        border: none;
+        cursor: pointer;
+    }
+}

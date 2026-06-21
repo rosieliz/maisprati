@@ -1,0 +1,14 @@
+:root {
+    --primary: #1a1a1a;
+    --secondary: #555555;
+    --terciary: #888888;
+    --background: #eceae5;
+    --accent: #c0392b;
+    --light: #ffffff;
+    --smooth: #6b6b6b;
+
+    --font-body: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --font-ui: Arial, Helvetica, sans-serif;
+
+    --radius: 8px;
+}

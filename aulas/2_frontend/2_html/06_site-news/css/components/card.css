@@ -1,0 +1,28 @@
+.card {
+    background-color: var(--light);
+    padding: 18px;
+    border-radius: var(--radius);
+    height: 100%;
+}
+
+.card__titulo {
+    font-size: 18px;
+    margin: 8px 0;
+}
+
+.card__resumo {
+    font-size: 15px;
+    color: var(--terciary);
+}
+
+.card--destaque {
+    padding: 28px;
+
+    .card__titulo {
+        font-size: 30px;
+    }
+
+    .card__serumo {
+        font-size: 17px;
+    }
+}
