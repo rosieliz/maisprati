@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/form.css">
+    <title>Tela de Cadastro</title>
+</head>
+<body>
+    <main class="principal">
+        <form id="form-cadastro" class="formulario">
+            <h1>Cadastrar</h1>
+
+            <label for="email">E-mail</label>
+            <input type="email" name="email" id="email" required>
+            
+
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="senha" required>
+
+            <p id="aviso"></p>
+
+            <button type="submit" class="btn">Cadastar</button>
+            <p class="rodape-form">Já tem conta? <a href="login.html">Entrar</a></p>
+        </form>
+
+        <script type="module" src="../js/cadastro.js"></script>
+    </main>
+</body>
+</html>

@@ -1,0 +1,44 @@
+.principal {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.formulario {
+    background-color: rgba(133, 133, 143, 0.496);
+    padding: 32px;
+    width: 100%;
+    max-width: 440px;
+    border-radius: 20px;
+
+    .btn {
+        width: 100%;
+        margin-top: 20px;
+        padding: 12px;
+        border-radius: 4px;
+    }
+
+    label {
+        font-size: 13px;
+        margin: 14px 0 4px;
+        display: block;
+    }
+
+    input {
+        width: 100%;
+        font-size: 15px;
+        padding: 10px;
+        border: solid 1px black;
+        border-radius: 4px;
+    }
+}
+
+.rodape-form {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+#aviso {
+    color: red;
+}

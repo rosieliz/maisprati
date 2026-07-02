@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+    <link rel="stylesheet" href="../css/form.css">
+</head>
+<body>
+    <main class="principal">
+        <form id="form-login" class="formulario">
+            <h1>Entrar</h1>
+
+            <label>
+                Email
+                <input id="email" type="email" name="email" required>
+            </label>
+
+            <label>
+                Senha
+                <input id="senha" type="password" name="senha" required>
+            </label>
+            <button class="btn" type="submit">Entrar</button>
+
+            <p id="aviso"></p>
+
+            <p class="rodape-form">
+                Não tem conta?
+                <a href="./cadastro.html">Cadastre-se</a>
+            </p>
+        </form>
+    </main>
+
+    <script type="module" src="../js/login.js"></script>
+</body>
+</html>
