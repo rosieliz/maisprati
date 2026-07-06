@@ -38,10 +38,6 @@ async function renderOptions(query, searchResults) {
 
 class Search extends HTMLElement {
     connectedCallback() {
-        this.render();
-    }
-
-    async render() {
         this.innerHTML =
             `<div class="input-area">
                 <input
