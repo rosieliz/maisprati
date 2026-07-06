@@ -20,12 +20,15 @@ async function renderOptions(query, searchResults) {
 
     options.forEach(opt => {
         const optionItem = document.createElement("div")
+        optionItem.classList.add("search-result");
 
         const optionImage = document.createElement("img");
         optionImage.src = opt.thumbnail
+        optionImage.classList.add("search-result__option_image");
 
         const optionText = document.createElement("span");
         optionText.innerText = opt.text;
+        optionText.classList.add("search-result__option_text");
 
         optionItem.appendChild(optionImage);
         optionItem.appendChild(optionText);

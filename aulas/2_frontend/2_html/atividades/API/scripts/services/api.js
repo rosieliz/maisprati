@@ -13,7 +13,7 @@ async function getRecords(query) {
 
         if (!release?.title) return;
 
-        const thumbnail = release.thumb ?? "https://placehold.co/40/c89fb5/c89fb5";
+        const thumbnail = release.thumb || "https://placehold.co/70/c89fb5/c89fb5";
         const artists = release.artists.map(a => a.name.replace(/\s\(.+\)/g, "")).join(", ");
         const text = `${artists} - ${release.title}`;
 
