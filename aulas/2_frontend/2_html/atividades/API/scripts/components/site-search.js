@@ -1,7 +1,6 @@
-
 function clearResults(searchResults) {
-    for (const ch of searchResults.children) {
-        searchResults.removeChild(ch);
+    while (searchResults.firstChild) {
+        searchResults.removeChild(searchResults.firstChild);
     }
 }
 
