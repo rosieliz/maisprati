@@ -20,10 +20,15 @@
     align-items: center;
     border: solid 1px var(--text);
     overflow: hidden;
+    cursor: pointer;
 }
 
 #search-results .search-result .search-result__option_image {
     height: 100%;
     width: 100%;
     aspect-ratio: 1 / 1;
+}
+
+.search-result:hover {
+    background-color: color-mix(in srgb, var(--secondary), transparent 75%);
 }

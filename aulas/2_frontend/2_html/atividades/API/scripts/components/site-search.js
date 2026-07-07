@@ -33,6 +33,18 @@ async function renderOptions(query, searchResults) {
         optionItem.appendChild(optionText);
 
         searchResults.appendChild(optionItem);
+
+        optionItem.addEventListener("click", () => {
+            const sidepane = document.querySelector(".sidepane");
+            const [ thumbnailElement, descriptionElement ] = sidepane.children;
+            const [ titleElement, artistElement ] = descriptionElement.children;
+
+            const [ artist, title ] = opt.text.split(" - ", 2);
+
+            thumbnailElement.src = optionImage.src;
+            titleElement.innerText = title;
+            artistElement.innerText = artist;
+        });
     });
 }
 
