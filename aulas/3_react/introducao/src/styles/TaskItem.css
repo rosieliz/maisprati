@@ -1,0 +1,15 @@
+.task-item {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1.3em) auto;
+    align-items: center;
+    gap: 0.5em;
+    margin: 1em 0;
+
+    button {
+        border: none;
+        aspect-ratio: 1 / 1;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+}
