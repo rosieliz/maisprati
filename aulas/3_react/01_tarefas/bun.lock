@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "sample-project",
+      "name": "tarefas",
       "dependencies": {
         "react": "^19.2.7",
         "react-dom": "^19.2.7",
