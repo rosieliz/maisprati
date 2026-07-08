@@ -3,8 +3,8 @@ import { useState } from "react";
 function Textarea({ callback, initialValue }) {
     const [value, setValue] = useState(initialValue || "");
 
-    function cancelEdit() {
-        if (callback) callback(initialValue);
+    function cancelEdit(event) {
+        if (callback) callback(initialValue, event);
     }
 
     function confirmEdit(event) {

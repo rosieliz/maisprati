@@ -27,8 +27,9 @@ function Tarefas() {
             </ul>
             {isEditing
                 ? <Textarea
-                    callback={(value) => {
+                    callback={(value, event) => {
                         setIsEditing(!isEditing);
+                        if (event?.type === "blur") return;
                         setTasks([
                             ...tasks,
                             { id: tasks.at(-1).id + 1, text: value, done: false }
