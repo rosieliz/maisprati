@@ -10,6 +10,7 @@
 
 @import "components/form.css";
 @import "components/button.css";
+@import "components/search.css";
 
 
 body {
@@ -44,8 +45,7 @@ body {
     margin: 8em 0;
 }
 
-#query-search {
-    font-size: 2em;
-    width: 100%;
-    padding: 0.2em;
+::selection {
+    color: var(--background);
+    background-color: var(--secondary);
 }

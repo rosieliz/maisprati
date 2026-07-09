@@ -7,9 +7,11 @@
 
     <link rel="stylesheet" href="styles/main.css">
 
+    <script src="./scripts/services/api.js" defer></script>
     <script src="./scripts/components/site-header.js" defer></script>
     <script src="./scripts/components/site-footer.js" defer></script>
     <script src="./scripts/components/site-sidepane.js" defer></script>
+    <script src="./scripts/components/site-search.js" defer></script>
 </head>
 <body>
     <site-header></site-header>
@@ -17,13 +19,7 @@
     <div id="content">
         <div class="container">
             <main>
-                <div class="input-area">
-                    <input
-                        id="query-search"
-                        type="text"
-                        placeholder="Pesquise por título..."
-                    >
-                </div>
+                <site-search></site-search>
             </main>
 
             <site-sidepane></site-sidepane>
