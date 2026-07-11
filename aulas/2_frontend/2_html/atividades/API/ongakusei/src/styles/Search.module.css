@@ -1,5 +1,3 @@
-@import "globals.css";
-
 .querySearch {
   font-size: 2em;
   width: 100%;
@@ -13,19 +11,19 @@
   flex-direction: column;
 }
 
-.searchResults .searchResult {
+.searchResult {
   height: 70px;
   width: 100%;
   display: grid;
   grid-template-columns: 70px auto;
   gap: 1em;
   align-items: center;
-  border: solid 1px var(--text);
+  border: solid 1px var(--text-secondary);
   overflow: hidden;
   cursor: pointer;
 }
 
-.searchResults .searchResult .searchResult__option_image {
+.searchResultImage {
   height: 100%;
   width: 100%;
   aspect-ratio: 1 / 1;

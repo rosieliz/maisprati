@@ -34,15 +34,16 @@ function Search({ setSelectedSong }: SearchProps) {
         {songs &&
           songs.map((song) => (
             <div
-              className={styles.searchResults__result}
+              key={song.id}
+              className={styles.searchResult}
               onClick={() => setSelectedSong(song)}
             >
               <img
-                className={styles.searchResults__image}
+                className={styles.searchResultImage}
                 src={song.thumb}
                 alt="Capa do lançamento"
               />
-              <span className={styles.searchResults__title}>{song.title}</span>
+              <span>{song.title}</span>
             </div>
           ))}
       </div>
