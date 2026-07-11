@@ -1,0 +1,36 @@
+@import "globals.css";
+
+.querySearch {
+  font-size: 2em;
+  width: 100%;
+  padding: 0.2em;
+  border: solid 1px var(--primary);
+  border-radius: 0;
+}
+
+.searchResults {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchResults .searchResult {
+  height: 70px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 70px auto;
+  gap: 1em;
+  align-items: center;
+  border: solid 1px var(--text);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.searchResults .searchResult .searchResult__option_image {
+  height: 100%;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.searchResult:hover {
+  background-color: color-mix(in srgb, var(--secondary), transparent 75%);
+}
