@@ -11,11 +11,24 @@
   }
 }
 
-.sidepane__info__title {
+.infoTitle {
   font-size: 2em;
   color: var(--text-secondary);
 }
 
-.sidepane__info__artist {
+.infoArtist {
   color: var(--primary);
+}
+
+.lyrics {
+  margin-top: 3em;
+}
+
+.lyricsTitle {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.lyricsLines {
+  white-space: pre-line;
 }

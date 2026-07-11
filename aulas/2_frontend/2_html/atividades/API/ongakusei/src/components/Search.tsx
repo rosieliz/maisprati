@@ -1,14 +1,14 @@
 import styles from "@/styles/Search.module.css";
 
 import { useState } from "react";
-import { getRecords, getLyrics } from "../lib/music";
+import { getRecords, getLyrics } from "../app/music";
 import type { ISong } from "../types/api.types";
 
 type SearchProps = {
-  setSelectedSong: (song: ISong) => void;
+  callback: (song: ISong, foundLyrics: string) => void;
 };
 
-function Search({ setSelectedSong }: SearchProps) {
+function Search({ callback }: SearchProps) {
   const [songs, setSongs] = useState<ISong[]>();
 
   const renderOptions = async (query: string) => {
@@ -36,7 +36,10 @@ function Search({ setSelectedSong }: SearchProps) {
             <div
               key={song.id}
               className={styles.searchResult}
-              onClick={() => setSelectedSong(song)}
+              onClick={async () => {
+                const lyrics = await getLyrics(song.url);
+                callback(song, lyrics);
+              }}
             >
               <img
                 className={styles.searchResultImage}

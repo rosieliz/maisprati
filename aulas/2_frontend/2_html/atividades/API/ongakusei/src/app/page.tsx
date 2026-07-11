@@ -18,6 +18,7 @@ const defaultSongData: ISong = {
 
 export default function Home() {
   const [selectedSong, setSelectedSong] = useState<ISong>(defaultSongData);
+  const [lyrics, setLyrics] = useState<string>("");
 
   return (
     <>
@@ -26,10 +27,13 @@ export default function Home() {
         <div className="container">
           <main>
             <Search
-              setSelectedSong={(newSong: ISong) => setSelectedSong(newSong)}
+              callback={(newSong: ISong, foundLyrics: string) => {
+                setLyrics(foundLyrics);
+                setSelectedSong(newSong);
+              }}
             />
           </main>
-          <Sidepane song={selectedSong} />
+          <Sidepane song={selectedSong} lyrics={lyrics} />
         </div>
       </div>
       <Footer />
