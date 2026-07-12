@@ -29,17 +29,24 @@ async function getRecords(query: string): Promise<ISong[]> {
 async function getLyrics(songUrl: string) {
   const url = new URL(songUrl);
   const pageText = await fetch(url.href).then((res) => res.text());
-  const selector = cheerio.load(pageText);
-  const containers = selector("div[data-lyrics-container='true']");
+  const $ = cheerio.load(pageText);
+  const containers = $("div[data-lyrics-container='true']");
+
+  const getLines = (el: any) =>
+    el.type === "text"
+      ? $(el).text() + "\n"
+      : ["a", "span", "i"].includes(el.name)
+        ? el.childNodes.map((e: any) => getLines(e)).join("")
+        : "";
 
   const lyrics = containers
     .contents()
-    .not("div > *")
-    .map((i: number, el: any) =>
-      i !== 0 && el.data.startsWith("[") ? `\n${el.data}` : el.data,
-    )
-    .toArray()
-    .join("\n");
+    .not("div[data-exclude-from-selection='true']")
+    .map((_, el) => getLines(el))
+    .get()
+    .map((line) => (line.startsWith("[") ? `\n${line}` : line))
+    .join("")
+    .trim();
 
   return lyrics;
 }
