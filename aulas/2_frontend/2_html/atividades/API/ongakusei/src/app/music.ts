@@ -22,6 +22,7 @@ async function fetchSongs(query: string): Promise<ISong[]> {
     thumb: result.header_image_url,
     id: result.id,
     url: result.url,
+    lyrics: "",
   }));
   return releases;
 }

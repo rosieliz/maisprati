@@ -4,6 +4,7 @@ interface ISong {
   title: string;
   artists: string;
   thumb: string;
+  lyrics: string;
 }
 
 interface IHitResult {

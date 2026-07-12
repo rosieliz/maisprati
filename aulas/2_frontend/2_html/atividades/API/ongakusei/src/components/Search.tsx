@@ -5,7 +5,7 @@ import { fetchSongs, scrapeLyrics } from "../app/music";
 import type { ISong } from "../types/api.types";
 
 type SearchProps = {
-  callback: (song: ISong, foundLyrics: string) => void;
+  callback: (song: ISong) => void;
 };
 
 function Search({ callback }: SearchProps) {
@@ -22,6 +22,20 @@ function Search({ callback }: SearchProps) {
     setSongs(options);
   };
 
+  const addLyrics = async (song: ISong): Promise<ISong> => {
+    const lyrics = await scrapeLyrics(song.url);
+
+    setSongs((prevState) =>
+      !prevState
+        ? prevState
+        : prevState.map((state) =>
+            state.id === song.id ? { ...song, lyrics } : state,
+          ),
+    );
+
+    return { ...song, lyrics };
+  };
+
   return (
     <div className="input-area">
       <input
@@ -36,9 +50,9 @@ function Search({ callback }: SearchProps) {
             <div
               key={song.id}
               className={styles.searchResult}
-              onClick={async () => {
-                const lyrics = await scrapeLyrics(song.url);
-                callback(song, lyrics);
+              onClick={() => {
+                callback(song);
+                addLyrics(song).then((e) => callback(e));
               }}
             >
               <img

@@ -14,11 +14,11 @@ const defaultSongData: ISong = {
   title: "...",
   artists: "...",
   thumb: "https://placehold.co/290/c89fb5/c89fb5",
+  lyrics: "",
 };
 
 export default function Home() {
   const [selectedSong, setSelectedSong] = useState<ISong>(defaultSongData);
-  const [lyrics, setLyrics] = useState<string>("");
 
   return (
     <>
@@ -26,14 +26,9 @@ export default function Home() {
       <div id="content">
         <div className="container">
           <main>
-            <Search
-              callback={(newSong: ISong, foundLyrics: string) => {
-                setLyrics(foundLyrics);
-                setSelectedSong(newSong);
-              }}
-            />
+            <Search callback={setSelectedSong} />
           </main>
-          <Sidepane song={selectedSong} lyrics={lyrics} />
+          <Sidepane song={selectedSong} />
         </div>
       </div>
       <Footer />

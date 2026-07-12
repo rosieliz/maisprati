@@ -4,10 +4,9 @@ import type { ISong } from "@/types/api.types";
 
 type SidepaneProps = {
   song: ISong;
-  lyrics: string;
 };
 
-function Sidepane({ song, lyrics }: SidepaneProps) {
+function Sidepane({ song }: SidepaneProps) {
   return (
     <aside className={styles.sidepane}>
       <img src={song.thumb} alt="Capa do lançamento" />
@@ -15,10 +14,10 @@ function Sidepane({ song, lyrics }: SidepaneProps) {
         <p className={styles.infoTitle}>{song.title}</p>
         <p className={styles.infoArtist}>{song.artists}</p>
       </div>
-      {lyrics && (
+      {song.lyrics && (
         <div className={styles.lyrics}>
           <p className={styles.lyricsTitle}>Letras</p>
-          <p className={styles.lyricsLines}>{lyrics}</p>
+          <p className={styles.lyricsLines}>{song.lyrics}</p>
         </div>
       )}
     </aside>
