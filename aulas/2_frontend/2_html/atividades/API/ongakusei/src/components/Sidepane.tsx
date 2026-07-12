@@ -6,18 +6,18 @@ type SidepaneProps = {
   song: ISong;
 };
 
-function Sidepane({ song }: SidepaneProps) {
+function Sidepane({ song: { title, artists, thumb, lyrics } }: SidepaneProps) {
   return (
     <aside className={styles.sidepane}>
-      <img src={song.thumb} alt="Capa do lançamento" />
+      <img src={thumb} alt="Capa do lançamento" />
       <div className={styles.info}>
-        <p className={styles.infoTitle}>{song.title}</p>
-        <p className={styles.infoArtist}>{song.artists}</p>
+        <p className={styles.infoTitle}>{title}</p>
+        <p className={styles.infoArtist}>{artists}</p>
       </div>
-      {song.lyrics && (
+      {lyrics && (
         <div className={styles.lyrics}>
           <p className={styles.lyricsTitle}>Letras</p>
-          <p className={styles.lyricsLines}>{song.lyrics}</p>
+          <p className={styles.lyricsLines}>{lyrics}</p>
         </div>
       )}
     </aside>
