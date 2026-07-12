@@ -1,7 +1,7 @@
 import styles from "@/styles/Search.module.css";
 
 import { useState } from "react";
-import { getRecords, getLyrics } from "../app/music";
+import { fetchSongs, scrapeLyrics } from "../app/music";
 import type { ISong } from "../types/api.types";
 
 type SearchProps = {
@@ -14,7 +14,7 @@ function Search({ callback }: SearchProps) {
   const renderOptions = async (query: string) => {
     if (!query.trim()) return;
 
-    const options = await getRecords(query).then((res) => res);
+    const options = await fetchSongs(query).then((res) => res);
     if (!options) {
       console.log("Nenhum lançamento encontrado.");
       return;
@@ -37,7 +37,7 @@ function Search({ callback }: SearchProps) {
               key={song.id}
               className={styles.searchResult}
               onClick={async () => {
-                const lyrics = await getLyrics(song.url);
+                const lyrics = await scrapeLyrics(song.url);
                 callback(song, lyrics);
               }}
             >

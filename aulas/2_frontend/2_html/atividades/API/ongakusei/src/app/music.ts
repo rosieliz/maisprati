@@ -3,7 +3,7 @@
 import * as cheerio from "cheerio";
 import type { IHitResult, ISong } from "@/types/api.types";
 
-async function getRecords(query: string): Promise<ISong[]> {
+async function fetchSongs(query: string): Promise<ISong[]> {
   const url = `https://api.genius.com/search?q=${encodeURIComponent(query)}`;
   const hits = await fetch(url, {
     headers: {
@@ -26,7 +26,7 @@ async function getRecords(query: string): Promise<ISong[]> {
   return releases;
 }
 
-async function getLyrics(songUrl: string) {
+async function scrapeLyrics(songUrl: string) {
   const url = new URL(songUrl);
   const pageText = await fetch(url.href).then((res) => res.text());
   const $ = cheerio.load(pageText);
@@ -51,4 +51,4 @@ async function getLyrics(songUrl: string) {
   return lyrics;
 }
 
-export { getRecords, getLyrics };
+export { fetchSongs, scrapeLyrics };
