@@ -1,24 +1,45 @@
 import styles from "@/styles/Sidepane.module.css";
 
-import type { ISong } from "@/types/api.types";
+import { type ISong, SearchStatus } from "@/types/api.types";
 
 type SidepaneProps = {
   song: ISong;
-  lyrics: string;
+  status: SearchStatus;
 };
 
-function Sidepane({ song, lyrics }: SidepaneProps) {
+function Sidepane({
+  song: { title, artists, thumb, lyrics },
+  status,
+}: SidepaneProps) {
+  const lyricsDisplay = (
+    <>
+      <p className={styles.lyricsTitle}>Letras</p>
+      <p className={styles.lyricsLines}>{lyrics}</p>
+    </>
+  );
+
+  const progressDisplay = <div>Buscando letras...</div>;
+  const notFoundDisplay = <div>Nenhuma letra encontada.</div>;
+
   return (
     <aside className={styles.sidepane}>
-      <img src={song.thumb} alt="Capa do lançamento" />
+      <img src={thumb} alt="Capa do lançamento" />
       <div className={styles.info}>
-        <p className={styles.infoTitle}>{song.title}</p>
-        <p className={styles.infoArtist}>{song.artists}</p>
+        <p className={styles.infoTitle}>{title}</p>
+        <p className={styles.infoArtist}>{artists}</p>
       </div>
-      {lyrics && (
+      {status !== SearchStatus.Idle && (
         <div className={styles.lyrics}>
-          <p className={styles.lyricsTitle}>Letras</p>
-          <p className={styles.lyricsLines}>{lyrics}</p>
+          {(() => {
+            switch (status) {
+              case SearchStatus.InProgress:
+                return progressDisplay;
+              case SearchStatus.Found:
+                return lyricsDisplay;
+              case SearchStatus.NotFound:
+                return notFoundDisplay;
+            }
+          })()}
         </div>
       )}
     </aside>

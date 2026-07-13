@@ -4,6 +4,7 @@ interface ISong {
   title: string;
   artists: string;
   thumb: string;
+  lyrics: string;
 }
 
 interface IHitResult {
@@ -16,4 +17,11 @@ interface IHitResult {
   };
 }
 
-export type { ISong, IHitResult };
+enum SearchStatus {
+  Idle,
+  InProgress,
+  Found,
+  NotFound,
+}
+
+export { type ISong, type IHitResult, SearchStatus };
