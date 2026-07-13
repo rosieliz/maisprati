@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { ISong } from "@/types/api.types";
+import { type ISong, SearchStatus } from "@/types/api.types";
 
 import Header from "@/components/Header";
 import Search from "@/components/Search";
@@ -19,6 +19,7 @@ const defaultSongData: ISong = {
 
 export default function Home() {
   const [selectedSong, setSelectedSong] = useState<ISong>(defaultSongData);
+  const [status, setStatus] = useState<SearchStatus>(SearchStatus.Idle);
 
   return (
     <>
@@ -26,9 +27,14 @@ export default function Home() {
       <div id="content">
         <div className="container">
           <main>
-            <Search callback={setSelectedSong} />
+            <Search
+              callback={(song: ISong, searchStatus: SearchStatus) => {
+                setSelectedSong(song);
+                setStatus(searchStatus);
+              }}
+            />
           </main>
-          <Sidepane song={selectedSong} />
+          <Sidepane song={selectedSong} status={status} />
         </div>
       </div>
       <Footer />
