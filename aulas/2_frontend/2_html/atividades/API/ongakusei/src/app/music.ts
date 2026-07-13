@@ -28,31 +28,38 @@ async function fetchSongs(query: string): Promise<ISong[]> {
 }
 
 async function scrapeLyrics(songUrl: string) {
-  const url = new URL(songUrl);
-  const pageText = await fetch(url.href).then((res) => res.text());
-  const $ = cheerio.load(pageText);
+  try {
+    const url = new URL(songUrl);
 
-  if ($("div[class^=LyricsPlaceholder]").length) return "";
+    const pageText = await fetch(url.href, {
+      mode: "cors",
+    }).then((res) => res.text());
+    const $ = cheerio.load(pageText);
 
-  const containers = $("div[data-lyrics-container='true']");
+    if ($("div[class^=LyricsPlaceholder]").length) return "";
 
-  const getLines = (el: any) =>
-    el.type === "text"
-      ? $(el).text() + "\n"
-      : ["a", "span", "i"].includes(el.name)
-        ? el.childNodes.map((e: any) => getLines(e)).join("")
-        : "";
+    const containers = $("div[data-lyrics-container='true']");
 
-  const lyrics = containers
-    .contents()
-    .not("div[data-exclude-from-selection='true']")
-    .map((_, el) => getLines(el))
-    .get()
-    .map((line) => (line.startsWith("[") ? `\n${line}` : line))
-    .join("")
-    .trim();
+    const getLines = (el: any) =>
+      el.type === "text"
+        ? $(el).text() + "\n"
+        : ["a", "span", "i"].includes(el.name)
+          ? el.childNodes.map((e: any) => getLines(e)).join("")
+          : "";
 
-  return lyrics;
+    const lyrics = containers
+      .contents()
+      .not("div[data-exclude-from-selection='true']")
+      .map((_, el) => getLines(el))
+      .get()
+      .map((line) => (line.startsWith("[") ? `\n${line}` : line))
+      .join("")
+      .trim();
+
+    return lyrics;
+  } catch (e) {
+    console.error("Lyrics fetch error:", e);
+  }
 }
 
 export { fetchSongs, scrapeLyrics };
