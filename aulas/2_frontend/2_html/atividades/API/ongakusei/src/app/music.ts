@@ -36,6 +36,7 @@ async function scrapeLyrics(songUrl: string) {
     }).then((res) => res.text());
     const $ = cheerio.load(pageText);
 
+    console.log("Page content:", pageText);
     if ($("div[class^=LyricsPlaceholder]").length) return "";
 
     const containers = $("div[data-lyrics-container='true']");
@@ -56,9 +57,10 @@ async function scrapeLyrics(songUrl: string) {
       .join("")
       .trim();
 
+    console.log("Lyrics:", lyrics);
     return lyrics;
   } catch (e) {
-    console.error("Lyrics fetch error:", e);
+    throw new Error("Lyrics fetch error");
   }
 }
 
