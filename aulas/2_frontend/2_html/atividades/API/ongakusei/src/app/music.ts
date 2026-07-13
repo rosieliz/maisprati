@@ -31,6 +31,9 @@ async function scrapeLyrics(songUrl: string) {
   const url = new URL(songUrl);
   const pageText = await fetch(url.href).then((res) => res.text());
   const $ = cheerio.load(pageText);
+
+  if ($("div[class^=LyricsPlaceholder]").length) return "";
+
   const containers = $("div[data-lyrics-container='true']");
 
   const getLines = (el: any) =>
