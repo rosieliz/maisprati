@@ -35,7 +35,10 @@ async function POST(request: NextRequest) {
 
     const lyrics = await scrapeLyrics(songUrl);
     if (!lyrics) {
-      return NextResponse.json({ error: "Lyrics not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Lyrics not found, likely blocked by anti-bot measures" },
+        { status: 404 },
+      );
     }
 
     return NextResponse.json({ lyrics });

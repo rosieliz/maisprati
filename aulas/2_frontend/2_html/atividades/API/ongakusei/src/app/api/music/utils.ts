@@ -1,5 +1,3 @@
-"use server";
-
 import * as cheerio from "cheerio";
 import type { ISong, IHitResult } from "@/types/api.types";
 
