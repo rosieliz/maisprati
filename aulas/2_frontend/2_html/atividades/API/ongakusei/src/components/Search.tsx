@@ -9,6 +9,7 @@ type SearchProps = {
 
 function Search({ callback }: SearchProps) {
   const [songs, setSongs] = useState<ISong[]>();
+  const [searchValue, setSearchValue] = useState<string>("");
 
   const renderOptions = async (query: string) => {
     if (!query.trim()) return;
@@ -49,7 +50,8 @@ function Search({ callback }: SearchProps) {
         className={styles.querySearch}
         type="text"
         placeholder="Pesquise por título..."
-        onBlur={(e) => renderOptions(e.target.value)}
+        onChange={(e) => setSearchValue(e.target.value)}
+        onKeyUp={(e) => e.key === "Enter" && renderOptions(searchValue)}
       />
       <div className={styles.searchResults}>
         {songs &&
