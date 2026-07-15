@@ -49,7 +49,7 @@ function Search({ callback }: SearchProps) {
       <input
         className={styles.querySearch}
         type="text"
-        placeholder="Pesquise por título..."
+        placeholder="Pesquise músicas por título..."
         onChange={(e) => setSearchValue(e.target.value)}
         onKeyUp={(e) => e.key === "Enter" && renderOptions(searchValue)}
       />
