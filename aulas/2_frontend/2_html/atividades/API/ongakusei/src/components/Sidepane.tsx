@@ -18,8 +18,15 @@ function Sidepane({
     </>
   );
 
-  const progressDisplay = <div>Buscando letras...</div>;
-  const notFoundDisplay = <div>Nenhuma letra encontada.</div>;
+  const progressDisplay = (
+    <div className={styles.progressDisplay}>
+      <div className={styles.loader}></div>
+      Buscando letras...
+    </div>
+  );
+  const notFoundDisplay = (
+    <div className={styles.notFound}>Nenhuma letra encontada.</div>
+  );
 
   return (
     <aside className={styles.sidepane}>
