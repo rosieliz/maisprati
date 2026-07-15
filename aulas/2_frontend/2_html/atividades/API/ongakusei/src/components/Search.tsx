@@ -27,7 +27,7 @@ function Search({ callback }: SearchProps) {
     const { lyrics } = await fetch("api/music", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ songUrl: song.url }),
+      body: JSON.stringify({ song }),
     }).then((res) => res.json());
 
     setSongs((prevState) =>

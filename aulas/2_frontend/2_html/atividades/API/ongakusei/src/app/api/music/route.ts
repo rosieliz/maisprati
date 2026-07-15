@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { fetchSongs, scrapeLyrics } from "./utils";
+import { fetchSongs, fetchLyrics } from "./utils";
 
 async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -28,18 +28,20 @@ async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    const { songUrl } = body;
-    if (!songUrl) {
+    const { song } = body;
+    if (!song.url) {
       return NextResponse.json({ error: "Missing song url" }, { status: 400 });
     }
 
-    const lyrics = await scrapeLyrics(songUrl);
-    if (!lyrics) {
-      return NextResponse.json(
-        { error: "Lyrics not found, likely blocked by anti-bot measures" },
-        { status: 404 },
-      );
-    }
+    // const lyrics = await scrapeLyrics(songUrl);
+    // if (!lyrics) {
+    //   return NextResponse.json(
+    //     { error: "Lyrics not found, likely blocked by anti-bot measures" },
+    //     { status: 404 },
+    //   );
+    // }
+
+    const lyrics = await fetchLyrics(song);
 
     return NextResponse.json({ lyrics });
   } catch (err) {

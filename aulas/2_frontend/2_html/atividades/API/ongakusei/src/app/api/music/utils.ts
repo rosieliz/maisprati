@@ -1,4 +1,3 @@
-import * as cheerio from "cheerio";
 import type { ISong, IHitResult } from "@/types/api.types";
 
 async function fetchSongs(query: string): Promise<ISong[]> {
@@ -25,41 +24,14 @@ async function fetchSongs(query: string): Promise<ISong[]> {
   return releases;
 }
 
-async function scrapeLyrics(songUrl: string): Promise<string> {
-  const url = new URL(songUrl);
-  const pageText = await fetch(url.href, {
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-      Accept:
-        "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-      "Accept-Language": "en-US,en;q=0.9",
-      Referer: "https://www.google.com/",
-    },
-  }).then((res) => res.text());
-
-  const $ = cheerio.load(pageText);
-  if ($("div[class^=LyricsPlaceholder]").length) return "";
-
-  const containers = $("div[data-lyrics-container=true]");
-
-  const getLines = (el: any) =>
-    el.type === "text"
-      ? $(el).text() + "\n"
-      : ["a", "span", "i"].includes(el.name)
-        ? el.childNodes.map((e: any) => getLines(e)).join("")
-        : "";
-
-  const lyrics = containers
-    .contents()
-    .not("div[data-exclude-from-selection='true']")
-    .map((_, el) => getLines(el))
-    .get()
-    .map((line) => (line.startsWith("[") ? `\n${line}` : line))
-    .join("")
-    .trim();
-
-  return lyrics;
+async function fetchLyrics(song: ISong): Promise<string> {
+  const url = new URL(
+    `https://lrclib.net/api/search?track_name=${song.title}&artist_name=${song.artists}`,
+  ).href;
+  const data = await fetch(url)
+    .then((res) => res.json())
+    .catch((err) => console.error("Error fetching lyrics:", err));
+  return data[0]?.plainLyrics || "";
 }
 
-export { fetchSongs, scrapeLyrics };
+export { fetchSongs, fetchLyrics };
