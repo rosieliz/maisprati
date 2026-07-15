@@ -14,14 +14,14 @@ function Search({ callback }: SearchProps) {
   const renderOptions = async (query: string) => {
     if (!query.trim()) return;
 
-    const { songs: options } = await await fetch(`/api/music?q=${query}`).then(
-      (res) => res.json(),
-    );
-    if (!options) {
-      console.log("Nenhum lançamento encontrado.");
+    const results = await fetch(`/api/music?q=${query}`)
+      .then((res) => res.json())
+      .then((data) => data.songs);
+    if (!results) {
+      console.log("Nenhuma música encontrada.");
       return;
     }
-    setSongs(options);
+    setSongs(results);
   };
 
   const addLyrics = async (song: ISong): Promise<ISong> => {
