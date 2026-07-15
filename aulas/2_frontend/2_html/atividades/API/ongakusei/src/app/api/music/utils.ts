@@ -29,7 +29,16 @@ async function fetchSongs(query: string): Promise<ISong[]> {
 
 async function scrapeLyrics(songUrl: string): Promise<string> {
   const url = new URL(songUrl);
-  const pageText = await fetch(url.href).then((res) => res.text());
+  const pageText = await fetch(url.href, {
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+      Accept:
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+      "Accept-Language": "en-US,en;q=0.9",
+      Referer: "https://www.google.com/",
+    },
+  }).then((res) => res.text());
 
   const $ = cheerio.load(pageText);
   if ($("div[class^=LyricsPlaceholder]").length) return "";
