@@ -25,6 +25,8 @@ async function fetchSongs(query: string): Promise<ISong[]> {
 }
 
 async function fetchLyrics(song: ISong): Promise<string> {
+  if (song.lyrics) return song.lyrics;
+
   const url = new URL(
     `https://lrclib.net/api/search?track_name=${song.title}&artist_name=${song.artists}`,
   ).href;

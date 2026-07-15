@@ -24,6 +24,8 @@ function Search({ callback }: SearchProps) {
   };
 
   const addLyrics = async (song: ISong): Promise<ISong> => {
+    if (song.lyrics) return song;
+
     const { lyrics } = await fetch("api/music", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
