@@ -1,7 +1,6 @@
 import styles from "@/styles/Search.module.css";
 
 import { useState } from "react";
-import { fetchSongs, scrapeLyrics } from "../app/music";
 import { type ISong, SearchStatus } from "@/types/api.types";
 
 type SearchProps = {
@@ -14,7 +13,9 @@ function Search({ callback }: SearchProps) {
   const renderOptions = async (query: string) => {
     if (!query.trim()) return;
 
-    const options = await fetchSongs(query).then((res) => res);
+    const { songs: options } = await await fetch(`/api/music?q=${query}`).then(
+      (res) => res.json(),
+    );
     if (!options) {
       console.log("Nenhum lançamento encontrado.");
       return;
@@ -23,7 +24,11 @@ function Search({ callback }: SearchProps) {
   };
 
   const addLyrics = async (song: ISong): Promise<ISong> => {
-    const lyrics = await scrapeLyrics(song.url);
+    const { lyrics } = await fetch("api/music", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ songUrl: song.url }),
+    }).then((res) => res.json());
 
     setSongs((prevState) =>
       !prevState
