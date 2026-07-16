@@ -13,7 +13,7 @@
 
 .infoTitle {
   font-size: 2em;
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .infoArtist {
@@ -45,10 +45,10 @@
 }
 
 .loader {
-  --color-1: rgba(98, 99, 165, 0.15);
-  --color-2: rgba(98, 99, 165, 0.25);
-  --color-3: rgba(98, 99, 165, 0.35);
-  --color-4: rgba(98, 99, 165, 0.5);
+  --color-1: rgba(var(--primary-rgb), 0.15);
+  --color-2: rgba(var(--primary-rgb), 0.25);
+  --color-3: rgba(var(--primary-rgb), 0.35);
+  --color-4: rgba(var(--primary-rgb), 0.5);
   --size: 1px;
 
   width: calc(20 * var(--size));

@@ -1,21 +1,24 @@
 :root {
-  --text-primary: #fcfcfd;
-  --text-secondary: #0d0e18;
+  --text-primary: #0d0e18;
+  --text-secondary: #fcfcfd;
   --primary: #6263a5;
   --secondary: #c89fb5;
   --accent: #b98587;
-  --background: var(--textSecondary);
+  --background: var(--text-secondary);
+
+  --primary-rgb: 98, 99, 165;
 
   --font: Electrolize, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-secondary: #e8e9f3;
+    --text-primary: #e8e9f3;
     --primary: #ab90db;
     --secondary: #822c86;
     --accent: #c245af;
     --background: #110a1e;
+    --primary-rgb: 171, 144, 219;
   }
 }
 
@@ -38,7 +41,7 @@ body {
 }
 
 body {
-  color: var(--text);
+  color: var(--text-primary);
   background-color: var(--background);
   font-family: var(--font);
 
@@ -71,5 +74,5 @@ body {
 
 ::selection {
   color: var(--background);
-  background-color: var(--secondary);
+  background-color: var(--accent);
 }

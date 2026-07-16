@@ -2,6 +2,7 @@
   display: flex;
 
   button {
+    color: var(--text-secondary);
     background-color: var(--primary);
     font-weight: bold;
     padding: 1em;
@@ -34,7 +35,7 @@
   grid-template-columns: 70px auto;
   gap: 1em;
   align-items: center;
-  border: solid 1px var(--text-secondary);
+  border: solid 1px var(--text-primary);
   overflow: hidden;
   cursor: pointer;
 }
