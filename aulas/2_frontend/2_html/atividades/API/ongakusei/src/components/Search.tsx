@@ -45,14 +45,17 @@ function Search({ callback }: SearchProps) {
   };
 
   return (
-    <div className="input-area">
-      <input
-        className={styles.querySearch}
-        type="text"
-        placeholder="Pesquise músicas por título..."
-        onChange={(e) => setSearchValue(e.target.value)}
-        onKeyUp={(e) => e.key === "Enter" && renderOptions(searchValue)}
-      />
+    <div>
+      <div className={styles.inputArea}>
+        <input
+          className={styles.querySearch}
+          type="text"
+          placeholder="Pesquise músicas por título..."
+          onChange={(e) => setSearchValue(e.target.value)}
+          onKeyUp={(e) => e.key === "Enter" && renderOptions(searchValue)}
+        />
+        <button onClick={() => renderOptions(searchValue)}>PESQUISAR</button>
+      </div>
       <div className={styles.searchResults}>
         {songs &&
           songs.map((song) => (
