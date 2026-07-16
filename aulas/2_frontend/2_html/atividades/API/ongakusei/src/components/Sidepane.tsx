@@ -1,10 +1,10 @@
 import styles from "@/styles/Sidepane.module.css";
 
-import { type ISong, SearchStatus } from "@/types/api.types";
+import { type ISong, ProgressStatus } from "@/types/api.types";
 
 type SidepaneProps = {
   song: ISong;
-  status: SearchStatus;
+  status: ProgressStatus;
 };
 
 function Sidepane({
@@ -35,15 +35,15 @@ function Sidepane({
         <p className={styles.infoTitle}>{title}</p>
         <p className={styles.infoArtist}>{artists}</p>
       </div>
-      {status !== SearchStatus.Idle && (
+      {status !== ProgressStatus.Idle && (
         <div className={styles.lyrics}>
           {(() => {
             switch (status) {
-              case SearchStatus.InProgress:
+              case ProgressStatus.InProgress:
                 return progressDisplay;
-              case SearchStatus.Found:
+              case ProgressStatus.Found:
                 return lyricsDisplay;
-              case SearchStatus.NotFound:
+              case ProgressStatus.NotFound:
                 return notFoundDisplay;
             }
           })()}

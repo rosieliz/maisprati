@@ -1,10 +1,10 @@
 import styles from "@/styles/Search.module.css";
 
 import { useState } from "react";
-import { type ISong, SearchStatus } from "@/types/api.types";
+import { type ISong, ProgressStatus } from "@/types/api.types";
 
 type SearchProps = {
-  callback: (song: ISong, searchStatus: SearchStatus) => void;
+  callback: (song: ISong, searchStatus: ProgressStatus) => void;
 };
 
 function Search({ callback }: SearchProps) {
@@ -63,11 +63,11 @@ function Search({ callback }: SearchProps) {
               key={song.id}
               className={styles.searchResult}
               onClick={() => {
-                callback(song, SearchStatus.InProgress);
+                callback(song, ProgressStatus.InProgress);
                 addLyrics(song).then((e) =>
                   callback(
                     e,
-                    e.lyrics ? SearchStatus.Found : SearchStatus.NotFound,
+                    e.lyrics ? ProgressStatus.Found : ProgressStatus.NotFound,
                   ),
                 );
               }}

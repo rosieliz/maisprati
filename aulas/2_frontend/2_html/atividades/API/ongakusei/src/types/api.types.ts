@@ -17,11 +17,11 @@ interface IHitResult {
   };
 }
 
-enum SearchStatus {
+enum ProgressStatus {
   Idle,
   InProgress,
   Found,
   NotFound,
 }
 
-export { type ISong, type IHitResult, SearchStatus };
+export { type ISong, type IHitResult, ProgressStatus };
