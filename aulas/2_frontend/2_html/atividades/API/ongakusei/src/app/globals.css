@@ -12,10 +12,10 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --text-secondary: #e8e9f3;
-    --primary: #595a9b;
-    --secondary: #61384e;
-    --accent: #7b4748;
-    --background: var(--textSecondary);
+    --primary: #ab90db;
+    --secondary: #822c86;
+    --accent: #c245af;
+    --background: #110a1e;
   }
 }
 
