@@ -17,9 +17,14 @@ function Home() {
       </section>
 
       <section className="grade">
-        {demais.map(({ categoria, titulo, resumo }, i) => (
+        {demais.map(({ categoria, titulo, resumo, id }, i) => (
           <div key={i}>
-            <NewsCard categoria={categoria} titulo={titulo} resumo={resumo} />
+            <NewsCard
+              categoria={categoria}
+              titulo={titulo}
+              resumo={resumo}
+              id={id}
+            />
           </div>
         ))}
       </section>

@@ -1,10 +1,12 @@
 import "./App.css";
 
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header/Header.jsx";
 import Home from "./pages/Home/Home.jsx";
-import { Routes, Route } from "react-router-dom";
+import Materia from "./pages/Materia/Materia.jsx";
+import Cadastro from "./pages/Cadastro/Cadastro.jsx";
 
 function App() {
   const [tema, setTema] = useState(() => {
@@ -34,6 +36,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/materia/:id" element={<Materia />} />
       </Routes>
     </>
   );
