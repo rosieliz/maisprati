@@ -1,6 +1,7 @@
 import styles from "@/styles/Search.module.css";
 
 import { useState } from "react";
+import Image from "next/image";
 
 import { type ISong, ProgressStatus } from "@/types/api.types";
 import Loader from "./Loader";
@@ -85,8 +86,22 @@ function Search({ callback }: SearchProps) {
             ))}
             <div className={styles.pagination}>
               {/*<Loader size={20} />*/}
-              <button className={styles.paginationButton}>‹</button>
-              <button className={styles.paginationButton}>›</button>
+              <button className={styles.paginationButton}>
+                <Image
+                  src="/icons/caret-left.svg"
+                  alt="c_left"
+                  height={10}
+                  width={10}
+                />
+              </button>
+              <button className={styles.paginationButton}>
+                <Image
+                  src="/icons/caret-right.svg"
+                  alt="c_left"
+                  height={10}
+                  width={10}
+                />
+              </button>
             </div>
           </>
         )}
