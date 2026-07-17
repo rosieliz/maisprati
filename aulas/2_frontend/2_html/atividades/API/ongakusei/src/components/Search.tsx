@@ -16,9 +16,9 @@ function Search({ callback }: SearchProps) {
   const renderOptions = async (query: string) => {
     if (!query.trim()) return;
 
-    const results = await fetch(`/api/music?q=${query}`)
-      .then((res) => res.json())
-      .then((data) => data.songs);
+    const { songs: results } = await fetch(`/api/music?q=${query}`).then(
+      (res) => res.json(),
+    );
     if (!results) {
       console.log("Nenhuma música encontrada.");
       return;
