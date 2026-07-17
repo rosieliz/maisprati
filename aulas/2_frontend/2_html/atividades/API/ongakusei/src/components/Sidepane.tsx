@@ -1,6 +1,7 @@
 import styles from "@/styles/Sidepane.module.css";
 
 import { type ISong, ProgressStatus } from "@/types/api.types";
+import Loader from "./Loader";
 
 type SidepaneProps = {
   song: ISong;
@@ -20,7 +21,7 @@ function Sidepane({
 
   const progressDisplay = (
     <div className={styles.progressDisplay}>
-      <div className={styles.loader}></div>
+      <Loader size={20} />
       Buscando letras...
     </div>
   );
