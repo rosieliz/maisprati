@@ -1,7 +1,9 @@
 import styles from "@/styles/Search.module.css";
 
 import { useState } from "react";
+
 import { type ISong, ProgressStatus } from "@/types/api.types";
+import Loader from "./Loader";
 
 type SearchProps = {
   callback: (song: ISong, searchStatus: ProgressStatus) => void;
@@ -57,29 +59,37 @@ function Search({ callback }: SearchProps) {
         <button onClick={() => renderOptions(searchValue)}>PESQUISAR</button>
       </div>
       <div className={styles.searchResults}>
-        {songs &&
-          songs.map((song) => (
-            <div
-              key={song.id}
-              className={styles.searchResult}
-              onClick={() => {
-                callback(song, ProgressStatus.InProgress);
-                addLyrics(song).then((e) =>
-                  callback(
-                    e,
-                    e.lyrics ? ProgressStatus.Found : ProgressStatus.NotFound,
-                  ),
-                );
-              }}
-            >
-              <img
-                className={styles.searchResultImage}
-                src={song.thumb}
-                alt="Capa do lançamento"
-              />
-              <span>{song.title}</span>
+        {songs && (
+          <>
+            {songs.map((song) => (
+              <div
+                key={song.id}
+                className={styles.searchResult}
+                onClick={() => {
+                  callback(song, ProgressStatus.InProgress);
+                  addLyrics(song).then((e) =>
+                    callback(
+                      e,
+                      e.lyrics ? ProgressStatus.Found : ProgressStatus.NotFound,
+                    ),
+                  );
+                }}
+              >
+                <img
+                  className={styles.searchResultImage}
+                  src={song.thumb}
+                  alt="Capa do lançamento"
+                />
+                <span>{song.title}</span>
+              </div>
+            ))}
+            <div className={styles.pagination}>
+              {/*<Loader size={20} />*/}
+              <button className={styles.paginationButton}>‹</button>
+              <button className={styles.paginationButton}>›</button>
             </div>
-          ))}
+          </>
+        )}
       </div>
     </div>
   );
