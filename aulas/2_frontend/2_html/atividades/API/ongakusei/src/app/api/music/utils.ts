@@ -1,7 +1,7 @@
 import type { ISong, IHitResult } from "@/types/api.types";
 
-async function fetchSongs(query: string): Promise<ISong[]> {
-  const url = `https://api.genius.com/search?q=${encodeURIComponent(query)}`;
+async function fetchSongs(query: string, page: string): Promise<ISong[]> {
+  const url = `https://api.genius.com/search?q=${encodeURIComponent(query)}&page=${page}`;
   const hits = await fetch(url, {
     headers: {
       Authorization: `Bearer ${process.env.GENIUS_ACCESS_KEY}`,

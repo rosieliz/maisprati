@@ -4,6 +4,7 @@ import { fetchSongs, fetchLyrics } from "./utils";
 async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const query = searchParams.get("q");
+  const page = searchParams.get("page") || "1";
 
   if (!query) {
     return NextResponse.json(
@@ -13,7 +14,7 @@ async function GET(request: NextRequest) {
   }
 
   try {
-    const songs = await fetchSongs(query);
+    const songs = await fetchSongs(query, page);
     return NextResponse.json({ songs });
   } catch (err) {
     console.error("Search error:", err);

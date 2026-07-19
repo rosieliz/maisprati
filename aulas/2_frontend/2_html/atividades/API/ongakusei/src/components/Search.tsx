@@ -1,6 +1,6 @@
 import styles from "@/styles/Search.module.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import { type ISong, ProgressStatus } from "@/types/api.types";
@@ -13,13 +13,27 @@ type SearchProps = {
 function Search({ callback }: SearchProps) {
   const [songs, setSongs] = useState<ISong[]>();
   const [searchValue, setSearchValue] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
 
-  const renderOptions = async (query: string) => {
-    if (!query.trim()) return;
+  useEffect(() => {
+    renderOptions();
+  }, [page]);
 
-    const { songs: results } = await fetch(`/api/music?q=${query}`).then(
-      (res) => res.json(),
-    );
+  const prevPage = () => {
+    if (page - 1 < 1) return;
+    setPage(page - 1);
+  };
+
+  const nextPage = () => {
+    setPage(page + 1);
+  };
+
+  const renderOptions = async () => {
+    if (!searchValue.trim()) return;
+
+    const { songs: results } = await fetch(
+      `/api/music?q=${searchValue}&page=${page}`,
+    ).then((res) => res.json());
     if (!results) {
       console.log("Nenhuma música encontrada.");
       return;
@@ -55,9 +69,9 @@ function Search({ callback }: SearchProps) {
           type="text"
           placeholder="Pesquise músicas por título..."
           onChange={(e) => setSearchValue(e.target.value)}
-          onKeyUp={(e) => e.key === "Enter" && renderOptions(searchValue)}
+          onKeyUp={(e) => e.key === "Enter" && renderOptions()}
         />
-        <button onClick={() => renderOptions(searchValue)}>PESQUISAR</button>
+        <button onClick={() => renderOptions()}>PESQUISAR</button>
       </div>
       <div className={styles.searchResults}>
         {songs && (
@@ -86,7 +100,7 @@ function Search({ callback }: SearchProps) {
             ))}
             <div className={styles.pagination}>
               {/*<Loader size={20} />*/}
-              <button className={styles.paginationButton}>
+              <button className={styles.paginationButton} onClick={prevPage}>
                 <Image
                   src="/icons/caret-left.svg"
                   alt="c_left"
@@ -94,7 +108,7 @@ function Search({ callback }: SearchProps) {
                   width={10}
                 />
               </button>
-              <button className={styles.paginationButton}>
+              <button className={styles.paginationButton} onClick={nextPage}>
                 <Image
                   src="/icons/caret-right.svg"
                   alt="c_left"
