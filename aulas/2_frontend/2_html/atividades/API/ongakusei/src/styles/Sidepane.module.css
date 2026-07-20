@@ -43,3 +43,10 @@
   gap: 0.5em;
   font-size: 1em;
 }
+
+@media (max-width: 768px) {
+  .sidepane {
+    margin-top: 5em;
+    border-left: none;
+  }
+}

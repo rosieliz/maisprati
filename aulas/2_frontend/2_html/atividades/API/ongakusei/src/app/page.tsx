@@ -26,7 +26,7 @@ export default function Home() {
       <Header />
       <div id="content">
         <div className="container">
-          <main>
+          <main className="main">
             <Search
               callback={(song: ISong, searchStatus: ProgressStatus) => {
                 setSelectedSong(song);

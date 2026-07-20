@@ -30,7 +30,7 @@ function Sidepane({
   );
 
   return (
-    <aside className={styles.sidepane}>
+    <aside className={"sidepane " + styles.sidepane}>
       <img src={thumb} alt="Capa do lançamento" />
       <div className={styles.info}>
         <p className={styles.infoTitle}>{title}</p>
