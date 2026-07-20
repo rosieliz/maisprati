@@ -1,3 +1,5 @@
+"use cache";
+
 import type { ISong, IHitResult } from "@/types/api.types";
 
 async function fetchSongs(query: string, page: string): Promise<ISong[]> {
