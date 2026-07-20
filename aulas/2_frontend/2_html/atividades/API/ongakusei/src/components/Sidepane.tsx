@@ -21,7 +21,7 @@ function Sidepane({
 
   const progressDisplay = (
     <div className={styles.progressDisplay}>
-      <Loader size={20} />
+      <Loader />
       Buscando letras...
     </div>
   );

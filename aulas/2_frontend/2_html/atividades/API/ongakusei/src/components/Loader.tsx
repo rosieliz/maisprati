@@ -1,10 +1,10 @@
 import styles from "@/styles/Loader.module.css";
 
 type LoaderProps = {
-  size: number;
+  size?: number;
 };
 
-function Loader({ size }: LoaderProps) {
+function Loader({ size = 20 }: LoaderProps) {
   return (
     <div
       className={styles.loader}
