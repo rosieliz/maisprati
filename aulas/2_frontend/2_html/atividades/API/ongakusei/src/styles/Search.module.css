@@ -80,3 +80,9 @@
     background-color: var(--accent);
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .paginationButton img {
+    filter: invert();
+  }
+}
