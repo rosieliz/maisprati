@@ -46,6 +46,16 @@
   aspect-ratio: 1 / 1;
 }
 
+.texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.artists {
+  color: var(--primary);
+  font-size: 0.8em;
+}
+
 .searchResult:hover {
   background-color: color-mix(in srgb, var(--secondary), transparent 75%);
 }

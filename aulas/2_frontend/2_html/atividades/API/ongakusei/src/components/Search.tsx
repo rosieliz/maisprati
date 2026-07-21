@@ -97,7 +97,10 @@ function Search({ callback }: SearchProps) {
                   src={song.thumb}
                   alt="Capa do lançamento"
                 />
-                <span>{song.title}</span>
+                <div className={styles.texts}>
+                  <span>{song.title}</span>
+                  <span className={styles.artists}>{song.artists}</span>
+                </div>
               </div>
             ))}
             <div className={styles.pagination}>
