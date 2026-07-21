@@ -46,7 +46,11 @@
   aspect-ratio: 1 / 1;
 }
 
-.texts {
+.listLoader {
+  margin: 4em auto;
+}
+
+.resultTexts {
   display: flex;
   flex-direction: column;
 }
@@ -63,6 +67,7 @@
 .pagination {
   display: flex;
   justify-content: end;
+  align-items: center;
   gap: 0.4em;
 
   margin-top: 0.5em;

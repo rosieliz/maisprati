@@ -12,10 +12,17 @@ type SearchProps = {
 
 function Search({ callback }: SearchProps) {
   const [songs, setSongs] = useState<ISong[]>();
+
   const [searchValue, setSearchValue] = useState<string>("");
+  const [fetching, setFetching] = useState<boolean>(false);
+
   const [page, setPage] = useState<number>(1);
+  const [maxPage, setMaxPage] = useState<number>(0);
 
   useEffect(() => {
+    if (page > maxPage) {
+      setMaxPage(page);
+    }
     renderOptions();
   }, [page]);
 
@@ -31,6 +38,10 @@ function Search({ callback }: SearchProps) {
   const renderOptions = async () => {
     if (!searchValue.trim()) return;
 
+    if (page > maxPage) {
+      setFetching(true);
+    }
+
     const { songs: results } = await fetch(
       `/api/music?q=${searchValue}&page=${page}`,
     ).then((res) => res.json());
@@ -38,6 +49,8 @@ function Search({ callback }: SearchProps) {
       console.log("Nenhuma música encontrada.");
       return;
     }
+
+    setFetching(false);
     setSongs(results);
   };
 
@@ -76,7 +89,11 @@ function Search({ callback }: SearchProps) {
         <button onClick={() => renderOptions()}>PESQUISAR</button>
       </div>
       <div className={styles.searchResults}>
-        {songs && (
+        {fetching && !songs?.length ? (
+          <div className={styles.listLoader}>
+            <Loader size={40} />
+          </div>
+        ) : songs ? (
           <>
             {songs.map((song) => (
               <div
@@ -97,14 +114,14 @@ function Search({ callback }: SearchProps) {
                   src={song.thumb}
                   alt="Capa do lançamento"
                 />
-                <div className={styles.texts}>
+                <div className={styles.resultTexts}>
                   <span>{song.title}</span>
                   <span className={styles.artists}>{song.artists}</span>
                 </div>
               </div>
             ))}
             <div className={styles.pagination}>
-              {/*<Loader size={20} />*/}
+              {fetching && <Loader size={20} />}
               <button className={styles.paginationButton} onClick={prevPage}>
                 <Image
                   src="/icons/caret-left.svg"
@@ -123,7 +140,7 @@ function Search({ callback }: SearchProps) {
               </button>
             </div>
           </>
-        )}
+        ) : null}
       </div>
     </div>
   );
