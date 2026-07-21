@@ -1,5 +1,3 @@
-import "./Cadastro.css";
-
 import { useState } from "react";
 import { buscarCEP } from "../../services/viacep";
 

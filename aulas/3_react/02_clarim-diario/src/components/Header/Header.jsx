@@ -1,5 +1,8 @@
 import "./Header.css";
 
+import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+
 function Header({ tema, aoAlternarTema }) {
   const hoje = new Date().toLocaleDateString("pt-BR", {
     weekday: "long",
@@ -8,12 +11,30 @@ function Header({ tema, aoAlternarTema }) {
     year: "numeric",
   });
 
+  const { usuario, logout } = useAuth();
+
   return (
     <header className="cabecalho">
       <div className="cabecalho__faixa">
         <span>Edição de Nova York</span>
         <span>{hoje}</span>
-        <span>U$ 1,50</span>
+
+        {usuario ? (
+          <span className="cabecalho__esssao">
+            Olá, {usuario.nome} - <Link to="/painel">Painel</Link>
+            <button className="cabecalho__sair" onClick={logout}>
+              Sair
+            </button>
+          </span>
+        ) : (
+          <>
+            <span>U$ 1,50</span>
+            <Link className="cabecalho__entrar" to="/login">
+              Entrar
+            </Link>
+          </>
+        )}
+
         <button className="cabecalho__tema" onClick={aoAlternarTema}>
           {tema === "light" ? "Escuro" : "Claro"}
         </button>
