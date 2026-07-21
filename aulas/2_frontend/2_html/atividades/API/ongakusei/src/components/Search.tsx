@@ -11,13 +11,16 @@ type SearchProps = {
 };
 
 function Search({ callback }: SearchProps) {
-  const [songs, setSongs] = useState<ISong[]>();
+  const [songs, setSongs] = useState<ISong[]>([]);
 
   const [searchValue, setSearchValue] = useState<string>("");
   const [fetching, setFetching] = useState<boolean>(false);
 
   const [page, setPage] = useState<number>(1);
   const [maxPage, setMaxPage] = useState<number>(0);
+
+  const [enablePrev, setEnablePrev] = useState<boolean>(false);
+  const [enableNext, setEnableNext] = useState<boolean>(false);
 
   useEffect(() => {
     if (page > maxPage) {
@@ -45,13 +48,18 @@ function Search({ callback }: SearchProps) {
     const { songs: results } = await fetch(
       `/api/music?q=${searchValue}&page=${page}`,
     ).then((res) => res.json());
+
+    setFetching(false);
+
     if (!results) {
       console.log("Nenhuma música encontrada.");
+      setEnableNext(false);
       return;
     }
 
-    setFetching(false);
     setSongs(results);
+    setEnablePrev(page !== 1);
+    setEnableNext(results?.length === 10);
   };
 
   const addLyrics = async (song: ISong): Promise<ISong> => {
@@ -89,7 +97,7 @@ function Search({ callback }: SearchProps) {
         <button onClick={() => renderOptions()}>PESQUISAR</button>
       </div>
       <div className={styles.searchResults}>
-        {fetching && !songs?.length ? (
+        {fetching && !songs.length ? (
           <div className={styles.listLoader}>
             <Loader size={40} />
           </div>
@@ -122,22 +130,26 @@ function Search({ callback }: SearchProps) {
             ))}
             <div className={styles.pagination}>
               {fetching && <Loader size={20} />}
-              <button className={styles.paginationButton} onClick={prevPage}>
-                <Image
-                  src="/icons/caret-left.svg"
-                  alt="c_left"
-                  height={10}
-                  width={10}
-                />
-              </button>
-              <button className={styles.paginationButton} onClick={nextPage}>
-                <Image
-                  src="/icons/caret-right.svg"
-                  alt="c_left"
-                  height={10}
-                  width={10}
-                />
-              </button>
+              {enablePrev && (
+                <button className={styles.paginationButton} onClick={prevPage}>
+                  <Image
+                    src="/icons/caret-left.svg"
+                    alt="c_left"
+                    height={10}
+                    width={10}
+                  />
+                </button>
+              )}
+              {enableNext && (
+                <button className={styles.paginationButton} onClick={nextPage}>
+                  <Image
+                    src="/icons/caret-right.svg"
+                    alt="c_left"
+                    height={10}
+                    width={10}
+                  />
+                </button>
+              )}
             </div>
           </>
         ) : null}
