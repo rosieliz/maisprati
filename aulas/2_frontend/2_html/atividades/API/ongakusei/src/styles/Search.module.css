@@ -64,6 +64,11 @@
   background-color: color-mix(in srgb, var(--secondary), transparent 75%);
 }
 
+.noMusicFound {
+  text-align: center;
+  margin-top: 1em;
+}
+
 .pagination {
   display: flex;
   justify-content: end;

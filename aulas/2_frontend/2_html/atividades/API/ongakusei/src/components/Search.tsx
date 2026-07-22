@@ -111,11 +111,11 @@ function Search({ callback }: SearchProps) {
         <button onClick={() => renderOptions()}>PESQUISAR</button>
       </div>
       <div className={styles.searchResults}>
-        {fetching && !songs.length ? (
+        {fetching && !songs?.length ? (
           <div className={styles.listLoader}>
             <Loader size={40} />
           </div>
-        ) : songs ? (
+        ) : songs.length ? (
           <>
             {songs.map((song) => (
               <div
@@ -158,6 +158,8 @@ function Search({ callback }: SearchProps) {
               )}
             </div>
           </>
+        ) : didSearch ? (
+          <p className={styles.noMusicFound}>Nenhuma música encontrada.</p>
         ) : null}
       </div>
     </div>
