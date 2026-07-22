@@ -1,6 +1,6 @@
 import styles from "@/styles/Search.module.css";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, KeyboardEvent } from "react";
 import Image from "next/image";
 
 import { type ISong, ProgressStatus } from "@/types/api.types";
@@ -82,6 +82,20 @@ function Search({ callback }: SearchProps) {
     return { ...song, lyrics };
   };
 
+  const triggerSearch = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== "Enter") return;
+    setPage(1);
+    setMaxPage(0);
+    renderOptions();
+  };
+
+  const selectSong = (song: ISong) => {
+    callback(song, ProgressStatus.InProgress);
+    addLyrics(song).then((e) =>
+      callback(e, e.lyrics ? ProgressStatus.Found : ProgressStatus.NotFound),
+    );
+  };
+
   return (
     <div>
       <div className={styles.inputArea}>
@@ -90,9 +104,9 @@ function Search({ callback }: SearchProps) {
           type="text"
           placeholder="Pesquise músicas por título..."
           autoComplete="off"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-          onKeyUp={(e) => e.key === "Enter" && renderOptions()}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyUp={(e) => triggerSearch(e)}
         />
         <button onClick={() => renderOptions()}>PESQUISAR</button>
       </div>
@@ -107,15 +121,7 @@ function Search({ callback }: SearchProps) {
               <div
                 key={song.id}
                 className={styles.searchResult}
-                onClick={() => {
-                  callback(song, ProgressStatus.InProgress);
-                  addLyrics(song).then((e) =>
-                    callback(
-                      e,
-                      e.lyrics ? ProgressStatus.Found : ProgressStatus.NotFound,
-                    ),
-                  );
-                }}
+                onClick={() => selectSong(song)}
               >
                 <img
                   className={styles.searchResultImage}
