@@ -1,6 +1,6 @@
 import styles from "@/styles/Search.module.css";
 
-import { useState, useEffect, KeyboardEvent } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import { type ISong, ProgressStatus } from "@/types/api.types";
@@ -13,12 +13,13 @@ type SearchProps = {
 function Search({ callback }: SearchProps) {
   const [songs, setSongs] = useState<ISong[]>([]);
 
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [fetching, setFetching] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>("");
 
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(0);
   const [maxPage, setMaxPage] = useState<number>(0);
 
+  const [didSearch, setDidSearch] = useState<boolean>(false);
+  const [fetching, setFetching] = useState<boolean>(false);
   const [enablePrev, setEnablePrev] = useState<boolean>(false);
   const [enableNext, setEnableNext] = useState<boolean>(false);
 
@@ -30,8 +31,7 @@ function Search({ callback }: SearchProps) {
   }, [page]);
 
   const prevPage = () => {
-    if (page - 1 < 1) return;
-    setPage(page - 1);
+    setPage(Math.max(1, page - 1));
   };
 
   const nextPage = () => {
@@ -39,14 +39,14 @@ function Search({ callback }: SearchProps) {
   };
 
   const renderOptions = async () => {
-    if (!searchValue.trim()) return;
+    if (!inputValue.trim()) return;
 
     if (page > maxPage) {
       setFetching(true);
     }
 
     const { songs: results } = await fetch(
-      `/api/music?q=${searchValue}&page=${page}`,
+      `/api/music?q=${inputValue}&page=${page}`,
     ).then((res) => res.json());
 
     setFetching(false);
@@ -82,11 +82,11 @@ function Search({ callback }: SearchProps) {
     return { ...song, lyrics };
   };
 
-  const triggerSearch = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key !== "Enter") return;
+  const triggerSearch = () => {
+    setFetching(true);
+    setDidSearch(true);
+    setMaxPage(1);
     setPage(1);
-    setMaxPage(0);
-    renderOptions();
   };
 
   const selectSong = (song: ISong) => {
@@ -106,9 +106,9 @@ function Search({ callback }: SearchProps) {
           autoComplete="off"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          onKeyUp={(e) => triggerSearch(e)}
+          onKeyUp={(e) => e.key === "Enter" && triggerSearch()}
         />
-        <button onClick={() => renderOptions()}>PESQUISAR</button>
+        <button onClick={triggerSearch}>PESQUISAR</button>
       </div>
       <div className={styles.searchResults}>
         {fetching && !songs?.length ? (
