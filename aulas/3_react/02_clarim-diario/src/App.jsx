@@ -10,6 +10,7 @@ import Cadastro from "./pages/Cadastro/Cadastro.jsx";
 import Login from "./pages/Login/Login.jsx";
 import RotaProtegida from "./components/RotaProtegida.jsx";
 import Painel from "./pages/Painel/Painel.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 
 function App() {
   const [tema, setTema] = useState(() => {
@@ -51,6 +52,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
     </>
   );
 }
