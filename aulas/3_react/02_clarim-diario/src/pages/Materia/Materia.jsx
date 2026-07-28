@@ -1,11 +1,35 @@
 import "./Materia.css";
 
 import { useParams, Link } from "react-router-dom";
-import { noticias } from "../../data/noticias";
+import { useState, useEffect } from "react";
+import { buscarNoticia } from "../../services/noticias";
 
 function Materia() {
   const { id } = useParams();
-  const noticia = noticias.find((n) => n.id === Number(id));
+
+  const [noticia, setNoticia] = useState(null);
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState("");
+
+  useEffect(() => {
+    async function carregar() {
+      try {
+        setCarregando(true);
+        setErro("");
+        const dados = await buscarNoticia(id);
+        setNoticia(dados);
+      } catch (err) {
+        setErro("Matéria não encontrada.", err);
+      } finally {
+        setCarregando(false);
+      }
+    }
+
+    carregar();
+  }, [id]);
+
+  if (carregando) return <p className="aviso-tela">Carregando a edição...</p>;
+  else if (erro) return <p className="aviso-tela">{erro}</p>;
 
   if (!noticia) {
     return (
