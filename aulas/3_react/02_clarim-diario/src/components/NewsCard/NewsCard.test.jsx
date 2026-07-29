@@ -19,4 +19,14 @@ describe("NewsCard", () => {
       screen.getByText("Metrô terá horário estendido"),
     ).toBeInTheDocument();
   });
+
+  it("não mostra parágrafo de resumo quando a prop não é informada", () => {
+    render(
+      <MemoryRouter>
+        <NewsCard id={2} categoria="Esportes" titulo="Knicks vencem" />
+      </MemoryRouter>,
+    );
+
+    expect(screen.queryByText(/Madison/)).not.toBeInTheDocument();
+  });
 });
