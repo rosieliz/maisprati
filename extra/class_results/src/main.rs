@@ -14,9 +14,11 @@ struct Student {
 }
 
 fn main() -> PdfResult<()> {
-    let content = read_pdf()?;
-    let students = format_pdf_output(content)?;
-    let output = print_students(students);
+    let lines = read_pdf()?;
+    let students = parse_lines(lines)?;
+    let output = format_output(students);
+
+    println!("{}", &output);
 
     let mut result_file = File::create("result.txt")?;
     result_file.write_all(&output.into_bytes())?;
@@ -27,7 +29,6 @@ fn main() -> PdfResult<()> {
 fn read_pdf() -> PdfResult<String> {
     if let Ok(mut file) = File::open("out.txt") {
         let mut lines = String::new();
-
         file.read_to_string(&mut lines)
             .expect("could not read cache lines");
         return Ok(lines);
@@ -53,7 +54,7 @@ fn read_pdf() -> PdfResult<String> {
     Ok(text)
 }
 
-fn format_pdf_output(lines: String) -> std::io::Result<Vec<Student>> {
+fn parse_lines(lines: String) -> std::io::Result<Vec<Student>> {
     let (_, data) = lines.split_once("Total").expect("content not found");
     let lines = data.trim().replace("\n\n", " ");
 
@@ -114,10 +115,10 @@ fn format_pdf_output(lines: String) -> std::io::Result<Vec<Student>> {
     Ok(students)
 }
 
-fn print_students(students: Vec<Student>) -> String {
+fn format_output(students: Vec<Student>) -> String {
     let longest_name = students.iter().map(|s| s.name.len()).max().unwrap_or(10);
-
-    let mut output = String::with_capacity(students.len() + 2);
+    let linelen = longest_name + 57; // newline, spaces and separators
+    let mut output = String::with_capacity(linelen * students.len());
 
     output.push_str(&format!(
         "| {0: <width$} | {1: ^10} | {2: ^10} | {3: ^10} | {4: ^10} |\n",
@@ -128,7 +129,7 @@ fn print_students(students: Vec<Student>) -> String {
         "Total",
         width = longest_name
     ));
-    output.push_str(&format!("{:#<width$}\n", "", width = longest_name + 56));
+    output.push_str(&format!("{:#<width$}\n", "", width = linelen - 1));
 
     students.iter().for_each(|student| {
         let Student {
@@ -148,8 +149,6 @@ fn print_students(students: Vec<Student>) -> String {
             width = longest_name
         ));
     });
-
-    println!("{}", &output);
 
     output
 }
