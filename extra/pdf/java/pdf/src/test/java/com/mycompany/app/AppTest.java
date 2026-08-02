@@ -8,9 +8,7 @@ import org.apache.pdfbox.text.PDFTextStripper;
 
 import java.io.IOException;
 import java.io.File;
-import java.util.Arrays;
 import java.util.regex.*;
-import java.util.stream.Collectors;
 
 
 /**
@@ -42,7 +40,7 @@ public class AppTest {
 
     @Test
     public void studentRegex() {
-        String line = "Akanni Obatayie Machado Silva 6.0 7.0 - 13.0 ";
+        String line = "Igor Borges Kühl 9.0 20.0 - 29.0 ";
         Matcher nameMatches = Pattern.compile("[a-zA-Z]+").matcher(line);
         String fullName = new String();
 

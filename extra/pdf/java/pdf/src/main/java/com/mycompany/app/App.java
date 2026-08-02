@@ -17,6 +17,7 @@ import java.util.stream.*;
 
 public class App {
     private static String cachePath = "out.txt";
+    private static String outputPath = "result.txt";
     private static String[] extraTexts = new String[] { "Grupo +praTI e Codifica - Dev Full Stack" };
 
     public static void main(String[] args) throws IOException {
@@ -71,6 +72,35 @@ public class App {
         writer.close();
     }
 
+    private static void saveResult(String output) throws IOException {
+        FileWriter writer = new FileWriter(outputPath);
+        writer.write(output);
+        writer.close();
+    }
+
+    private static void checkCachedResultAndExitProgram() throws IOException {
+        File result = new File(outputPath);
+        if (!result.exists() || result.toString().trim().length() == 0) return;
+
+        BufferedReader reader = new BufferedReader(new FileReader(outputPath));
+        String line = "";
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+        reader.close();
+        System.exit(0);
+    }
+
+    private static Student[] parseStudents(String content) {
+        String[] filteredLines = filterLines(content);
+        Student[] students = Arrays.stream(filteredLines).map(line -> Student.fromLine(line)).toArray(size -> new Student[size]);
+        return students;
+    }
+
+    private static String filterContent(String[] content) {
+        return String.join("\n", content);
+    }
+
     private static String[] filterLines(String content) {
         List<String> lines = Arrays.asList(content.split("\n"));
         List<String> filteredLines = lines.stream().filter(line -> validateLine(line)).collect(Collectors.toList());
@@ -78,21 +108,11 @@ public class App {
         return filteredLines.toArray(new String[0]);
     }
 
-    private static String filterContent(String[] content) {
-        return String.join("\n", content);
-    }
-
     private static boolean validateLine(String line) {
         return 
             line.trim().length() > 0 &&
             !Character.isDigit(line.charAt(0)) &&
             !Arrays.asList(extraTexts).contains(line.trim());
-    }
-
-    private static Student[] parseStudents(String content) {
-        String[] filteredLines = filterLines(content);
-        Student[] students = Arrays.stream(filteredLines).map(line -> Student.fromLine(line)).toArray(size -> new Student[size]);
-        return students;
     }
 
     private static String formatOutput(Student[] students) {
@@ -140,25 +160,6 @@ public class App {
         }
 
         return builder.toString();
-    }
-
-    private static void saveResult(String output) throws IOException {
-        FileWriter writer = new FileWriter("result.txt");
-        writer.write(output);
-        writer.close();
-    }
-
-    private static void checkCachedResultAndExitProgram() throws IOException {
-        File result = new File("result.txt");
-        if (!result.exists() || result.toString().trim().length() == 0) return;
-
-        BufferedReader reader = new BufferedReader(new FileReader("result.txt"));
-        String line = "";
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
-        }
-        reader.close();
-        System.exit(0);
     }
 }
 

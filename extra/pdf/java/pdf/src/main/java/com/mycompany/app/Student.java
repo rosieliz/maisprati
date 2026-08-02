@@ -25,8 +25,6 @@ public class Student {
     // TODO: throw an error if the line doesn't match the desired pattern 
     public static Student fromLine(String line) {
         String studentName = matchName(line);
-        // line.replaceFirst(studentName, "");
-        // List<String> grades = gradePattern.matcher(line).results().map(g -> g.toString()).collect(Collectors.toList());
         String[] grades = matchGrades(line);
 
         return new Student(
@@ -63,3 +61,4 @@ public class Student {
         return foundGrades;
     }
 }
+
